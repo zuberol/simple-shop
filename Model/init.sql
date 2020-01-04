@@ -28,7 +28,8 @@ CREATE TABLE cart (
   book_id INT,
   quantity INT DEFAULT 1,
   FOREIGN KEY (customer_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (book_id) REFERENCES books(id) ON UPDATE CASCADE ON DELETE CASCADE
+  FOREIGN KEY (book_id) REFERENCES books(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  UNIQUE (customer_id, book_id)
 );
 
 

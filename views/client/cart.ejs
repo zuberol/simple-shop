@@ -22,16 +22,16 @@
                             <p class="product__description"><%=product.description%></p>
                         </div>
                         <div class="card__actions">
-                            <a class="btn" href="/products?bookid=<%=product.id%>"> Detail </a>
-                            <form action="/add-to-cart?bookid=<%=product.id%>" method="POST">
-                                <button class="btn">Add to Cart</button>
+                            <a class="btn" href="/products/<%=product.id%>"> Detail </a>
+                            <form action="/delete-from-cart?bookid=<%=product.id%>" method="POST">
+                                <button class="btn"> Delete from cart </button>
                             </form>
                         </div>
                     </article>
                 <% } %>
             </div>
         <% } else { %>
-            <h1>No Products Found!</h1>
+            <h1>Your cart is empty.</h1>
         <% } %>
     </main>
 <%- include('../includes/end.ejs') %>
