@@ -19,10 +19,10 @@
                         </div>
                         <div class="card__content">
                             <h2 class="product__price">$<%=product.price%></h2>
-                            <p class="product__description"><%=product.description%></p>
+                            <p class="product__description">Quantity: <%= product.quantity %></p>
                         </div>
                         <div class="card__actions">
-                            <a class="btn" href="/products/<%=product.id%>"> Detail </a>
+                            <a class="btn" href="/products?bookid=<%=product.id%>"> Details </a>
                             <form action="/delete-from-cart?bookid=<%=product.id%>" method="POST">
                                 <button class="btn"> Delete from cart </button>
                             </form>

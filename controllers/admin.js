@@ -17,3 +17,18 @@ exports.postProducts = (request, response) => {
 exports.getProducts = (req, res, next) => {
   res.render('admin/add-product', {path: '/admin/add-product',pageTitle:"Admin products list", isAuthenticated: true});
 };
+
+// /products => GET
+exports.getAdminProducts = (request, response, next) => {
+  admin_email = request.session.email;
+  pool.query('SELECT * FROM books WHERE seller_id=any(SELECT id FROM users WHERE login=($1))', [admin_email], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).render('client/products-list.ejs', {
+      prods: results.rows,
+      path: '/admin/products',
+      pageTitle: "Admin products",
+      isAuthenticated: request.session.isAuthenticated ? true : false})
+  })
+};

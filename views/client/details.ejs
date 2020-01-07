@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/details.css">
 </head>
 
 <body>
@@ -7,21 +7,35 @@
     <main>
         <div class="grid">
             <% for (let product of prods) { %>
-                <header class="card__header">
-                    <h1 class="product__title"><%= product.title %></h1>
-                </header>
-                <div class="card__image">
-                    <img src="<%= product.url %>"
-                        alt="A Book">
+                <div class="card details__left">
+                    <div class="card details__image">
+                        <div class="card__image">
+                            <img src="<%= product.url %>"
+                                alt="A Book">
+                        </div>
+                    </div>
+                    <div class="details__info">
+                        <header>
+                            <h1 class="details__title"><%= product.title %></h1>
+                        </header>
+                        <hr>
+                        <p>Author: <%=product.author%></p>
+                        <p>Category: <%=product.name%></p>
+                        <p><%=product.description%></p>
+                        
+                    </div>
                 </div>
-                <div class="card__content">
-                    <h2 class="product__price">$<%=product.price%></h2>
-                    <p class="product__description"><%=product.description%></p>
-                </div>
-                <div class="card__actions">
-                    <form action="/add-to-cart?bookid=<%=product.id%>" method="POST">
-                        <button class="btn"> Add to cart </button>
-                    </form>
+                <div class="card details__right">
+                    <div>
+                        <h2 class="details__price">$<%=product.price%></h2>
+                        <hr class="horizontal-line">
+                        <form action="/add-to-cart?bookid=<%=product.id%>" method="POST">
+                            <label for="quantity">Quantity</label>
+                            <input class="quantity" type="number" name="quantity" id="quantity" min=1 max=10 value=1 required>
+                            <hr class="horizontal-line">
+                            <button class="btn" type="submit"> Add to cart </button>
+                        </form>
+                    </div>
                 </div>
             <% } %>
         </div>

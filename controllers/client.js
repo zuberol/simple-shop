@@ -18,7 +18,7 @@ exports.getProductsList = (request, response, next) => {
 exports.getProductDetails = (request, response, next) => {
   const book_id = request.query.bookid;
   if (book_id){
-    pool.query('SELECT * FROM books WHERE id=($1)', [book_id], (error, results) => {
+    pool.query('SELECT b.*, c.name FROM books b, categories c WHERE b.category_id=c.id and b.id=($1)', [book_id], (error, results) => {
       if (error) {
         throw error
       }
@@ -45,49 +45,41 @@ exports.getProductDetails = (request, response, next) => {
 };
 
 // cart list => GET
-// !!!!! customer_id is set to 1
 exports.getCartList = (request, response, next) => {
-  //const customer_id = request.query.customerid;
-  const customer_id = 1;
-  pool.query('SELECT * FROM books WHERE id=any(SELECT book_id FROM cart where customer_id=($1))', [customer_id], (error, results) => {
+  customer_email = request.session.email;
+  pool.query('SELECT b.id, b.title, b.url, b.price, c.quantity FROM books b, cart c WHERE b.id=c.book_id and c.customer_id=any(SELECT id FROM users WHERE login=($1))', [customer_email], (error, results) => {
     if (error) {
       throw error
     }
-    response.status(200).render('client/cart.ejs', {
-      prods: results.rows,
-      path: '/cart',
-      pageTitle: "Cart",
-      isAuthenticated: request.session.isAuthenticated ? true : false})
+  response.status(200).render('client/cart.ejs', {
+    prods: results.rows,
+    path: '/cart',
+    pageTitle: "Cart",
+    isAuthenticated: request.session.isAuthenticated ? true : false})
   })
 };
 
 // add-to-cart => POST
-// !!!!! customer_id is set to 1
-// TODO: quantity
 exports.addToCart = (request, response) => {
-  //const customer_id = request.query.customerid;
-  const customer_id = 1;
+  customer_email = request.session.email;
   const book_id = request.query.bookid;
-  pool.query('INSERT INTO cart (customer_id, book_id, quantity) VALUES ($1, $2, $3)', [customer_id, book_id, 1], error => {
-    if (error) {
-      throw error
-    }
-    response.redirect('/cart');  // customerid is set to 1 !!!
-    //console.log("Product added to cart.")
+  const quantity  = request.body.quantity;
+  pool.query('INSERT INTO cart (customer_id, book_id, quantity) VALUES ((SELECT id FROM users WHERE login=($1)), $2, $3)', [customer_email, book_id, quantity], error => {
+    // if (error) {
+    //  throw error
+    //}
+    response.redirect('/cart');
   })
 };
 
 // delete-from-cart => POST 
-// !!!!! customer_id is set to 1
 exports.deleteFromCart = (request, response) => {
-  //const customer_id = request.query.customerid;
-  const customer_id = 1;
+  customer_email = request.session.email;
   const book_id = request.query.bookid;
-  pool.query('DELETE FROM cart WHERE customer_id=($1) and book_id=($2)', [customer_id, book_id], error => {
+  pool.query('DELETE FROM cart WHERE customer_id=any(SELECT id FROM users WHERE login=($1)) and book_id=($2)', [customer_email, book_id], error => {
     if (error) {
       throw error
     }
     response.redirect('/cart');
-    //console.log("Product deleted from cart.")
   })
 };
