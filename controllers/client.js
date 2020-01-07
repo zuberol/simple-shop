@@ -6,8 +6,8 @@ exports.getProductsList = (request, response, next) => {
       if (error) {
         throw error
       }
-      console.log(results.rows);
-      response.status(200).render('client/products-list.ejs', {prods: results.rows, path: '/'})
+      //console.log(request.session.isAuthenticated);
+      response.status(200).render('client/products-list.ejs', {prods: results.rows, path: '/', pageTitle:"Products list",isAuthenticated: request.session.isAuthenticated ? true : false})
     })
 };
 
@@ -19,16 +19,16 @@ exports.getProductDetails = (request, response, next) => {
       if (error) {
         throw error
       }
-      console.log(results.rows);
-      response.status(200).render('client/details.ejs', {prods: results.rows, path: '/products'})
+      //console.log(results.rows);
+      response.status(200).render('client/details.ejs', {prods: results.rows, path: '/products', pageTitle:"Product details",isAuthenticated: request.session.isAuthenticated ? true : false})
     })
   } else {
     pool.query('SELECT * FROM books', (error, results) => {
       if (error) {
         throw error
       }
-      console.log(results.rows);
-      response.status(200).render('client/products-list.ejs', {prods: results.rows, path: '/products'})
+      //console.log(results.rows);
+      response.status(200).render('client/products-list.ejs', {prods: results.rows, path: '/products', pageTitle:"Products list",isAuthenticated: request.session.isAuthenticated ? true : false})
     })
   }
 };
@@ -42,7 +42,7 @@ exports.getCartList = (request, response, next) => {
     if (error) {
       throw error
     }
-    response.status(200).render('client/cart.ejs', {prods: results.rows, path: '/cart'})
+    response.status(200).render('client/cart.ejs', {prods: results.rows, path: '/cart', pageTitle: "Cart",isAuthenticated: request.session.isAuthenticated ? true : false})
   })
 };
 
@@ -58,7 +58,7 @@ exports.addToCart = (request, response) => {
       throw error
     }
     response.redirect('/cart');  // customerid is set to 1 !!!
-    console.log("Product added to cart.")
+    //console.log("Product added to cart.")
   })
 };
 
@@ -73,6 +73,6 @@ exports.deleteFromCart = (request, response) => {
       throw error
     }
     response.redirect('/cart');
-    console.log("Product deleted from cart.")
+    //console.log("Product deleted from cart.")
   })
 };

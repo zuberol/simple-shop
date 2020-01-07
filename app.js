@@ -5,20 +5,38 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-app.set('view engine','ejs')
-app.set('views', 'views')
+app.set('view engine','ejs');
+app.set('views', 'views');
+
+//session part
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const pgPool = require('./Model/database-pool').pool;
+
+app.use(session({
+  store: new pgSession({
+    pool : pgPool,                // Connection pool
+    tableName : 'session'   // Use another table-name than the default "session" one
+  }),
+  secret:"my dummy secret",
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const adminRoutes = require('./routes/admin')
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
-const errorRoute = require('./routes/404')
+const errorRoute = require('./routes/404');
+const authRoutes = require('./routes/auth');
 
 
+app.use(authRoutes);
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(errorRoute);
+
 
 app.listen(3000, () => {
     console.log('Server listening ...')

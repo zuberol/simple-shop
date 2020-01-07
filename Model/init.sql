@@ -32,14 +32,24 @@ CREATE TABLE cart (
   UNIQUE (customer_id, book_id)
 );
 
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+	"sess" json NOT NULL,
+	"expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
 INSERT INTO categories (name) VALUES ('Fantasy');
 INSERT INTO categories (name) VALUES ('Lektury');
 INSERT INTO categories (name) VALUES ('Others');
 
-INSERT INTO users (login, password) VALUES ('user123', 'pswd11');
-INSERT INTO users (login, password) VALUES ('harry', 'hello');
-INSERT INTO users (login, password) VALUES ('nobody', 'xyz00');
+INSERT INTO users (login, password) VALUES ('user123@wp.pl', 'pswd11');
+INSERT INTO users (login, password) VALUES ('harry@gmail.com', 'hello');
+INSERT INTO users (login, password) VALUES ('nobody@o2.pl', 'xyz00');
 
 INSERT INTO books (author, title, category_id, price, description, url, seller_id)
 VALUES  ('J.K. Rowling', 'Harry Potter', 1, 10.99, 'Potter, where is Potter - Snape said.', '/products-images/book-id-1.png', 1);
