@@ -17,13 +17,37 @@ exports.getSignup = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  req.session.email = req.body.email;
-  req.session.password = req.body.password;
-  req.session.isAuthenticated = true;
+  req.session.isAuthenticated = false;
 
-  req.session.save(err => {
-    console.log(err);
-    res.redirect('/');
+  const findUser = 'SELECT * FROM users WHERE login=($1)';
+  const values = [req.body.email]
+
+  pool
+  .query(findUser, values)
+  .then(user_params => {
+    if(user_params.rowCount===0){
+      console.log('There is no such email in a database!');
+      res.redirect('/');
+    }
+    else{
+      if(user_params.rows[0].login === req.body.email && user_params.rows[0].password === req.body.password){
+        req.session.email = req.body.email;
+        req.session.password = req.body.password;
+        req.session.isAuthenticated = true;
+
+        req.session.save(err => {
+          console.log(err);
+          res.redirect('/');
+        });
+      }
+      else{
+        console.log('Bad login!')
+      }
+    }
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/')
   });
 };
 
