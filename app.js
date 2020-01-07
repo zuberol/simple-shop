@@ -8,7 +8,6 @@ const app = express();
 app.set('view engine','ejs');
 app.set('views', 'views');
 
-//session part
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 const pgPool = require('./Model/database-pool').pool;
@@ -16,7 +15,7 @@ const pgPool = require('./Model/database-pool').pool;
 app.use(session({
   store: new pgSession({
     pool : pgPool,                // Connection pool
-    tableName : 'session'   // Use another table-name than the default "session" one
+    tableName : 'session'   
   }),
   secret:"my dummy secret",
   resave: false,

@@ -6,8 +6,11 @@ exports.getProductsList = (request, response, next) => {
       if (error) {
         throw error
       }
-      //console.log(request.session.isAuthenticated);
-      response.status(200).render('client/products-list.ejs', {prods: results.rows, path: '/', pageTitle:"Products list",isAuthenticated: request.session.isAuthenticated ? true : false})
+      response.status(200).render('client/products-list.ejs', {
+      prods: results.rows,
+      path: '/',
+      pageTitle:"Products list",
+      isAuthenticated: request.session.isAuthenticated ? true : false})
     })
 };
 
@@ -20,7 +23,11 @@ exports.getProductDetails = (request, response, next) => {
         throw error
       }
       //console.log(results.rows);
-      response.status(200).render('client/details.ejs', {prods: results.rows, path: '/products', pageTitle:"Product details",isAuthenticated: request.session.isAuthenticated ? true : false})
+      response.status(200).render('client/details.ejs', {
+        prods: results.rows,
+        path: '/products',
+        pageTitle:"Product details",
+        isAuthenticated: request.session.isAuthenticated ? true : false})
     })
   } else {
     pool.query('SELECT * FROM books', (error, results) => {
@@ -28,7 +35,11 @@ exports.getProductDetails = (request, response, next) => {
         throw error
       }
       //console.log(results.rows);
-      response.status(200).render('client/products-list.ejs', {prods: results.rows, path: '/products', pageTitle:"Products list",isAuthenticated: request.session.isAuthenticated ? true : false})
+      response.status(200).render('client/products-list.ejs', {
+        prods: results.rows,
+        path: '/products',
+        pageTitle:"Products list",
+        isAuthenticated: request.session.isAuthenticated ? true : false})
     })
   }
 };
@@ -42,7 +53,11 @@ exports.getCartList = (request, response, next) => {
     if (error) {
       throw error
     }
-    response.status(200).render('client/cart.ejs', {prods: results.rows, path: '/cart', pageTitle: "Cart",isAuthenticated: request.session.isAuthenticated ? true : false})
+    response.status(200).render('client/cart.ejs', {
+      prods: results.rows,
+      path: '/cart',
+      pageTitle: "Cart",
+      isAuthenticated: request.session.isAuthenticated ? true : false})
   })
 };
 
