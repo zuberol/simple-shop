@@ -78,6 +78,11 @@ form {
   color: #ffeb3b;
 }
 
+.dropbtn {
+  border: none;
+  outline: none;
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -106,7 +111,6 @@ form {
 
 .dropdown:hover .dropdown-content {display: block;}
 
-
 .mobile-nav {
   width: 30rem;
   height: 100vh;
@@ -119,6 +123,7 @@ form {
   padding: 2rem 1rem 1rem 2rem;
   transform: translateX(-100%);
   transition: transform 0.3s ease-out;
+  overflow-y: auto;
 }
 
 .mobile-nav.open {
@@ -269,5 +274,15 @@ form {
 
   #side-menu-toggle {
     display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dropdown {float: none;}
+  .dropdown-content {position: relative;}
+  .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
   }
 }

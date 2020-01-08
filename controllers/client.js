@@ -15,6 +15,22 @@ exports.getProductsList = (request, response, next) => {
   })
 };
 
+// default => GET
+exports.getProductsByCategory = (request, response, next) => {
+  const category_id = request.query.catid;
+  pool.query('SELECT * FROM books WHERE category_id=($1)', [category_id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).render('client/products-list.ejs', {
+      prods: results.rows,
+      path: '/category',
+      pageTitle:"Products list",
+      isAuthenticated: request.session.isAuthenticated ? true : false
+    })
+  })
+};
+
 // product details => GET
 exports.getProductDetails = (request, response, next) => {
   const book_id = request.query.bookid;

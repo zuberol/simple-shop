@@ -2,9 +2,9 @@ const { pool } = require('../Model/database-pool');
 
 // /add-product => POST
 exports.postProducts = (request, response) => {
-  const { author, title, price, description, url } = request.body
-
-  pool.query('INSERT INTO books (author, title, price, description, url) VALUES ($1, $2, $3, $4, $5)', [author, title, price, description, url], error => {
+  const { author, title, price, description, url, category } = request.body;
+  const seller_id = request.session.email;
+  pool.query('INSERT INTO books (author, title, price, description, url, category_id, seller_id) VALUES ($1, $2, $3, $4, $5, $6, (SELECT id FROM users WHERE login=($7)))', [author, title, price, description, url, category, seller_id], error => {
     if (error) {
       throw error
     }

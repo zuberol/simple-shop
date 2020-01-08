@@ -86,7 +86,7 @@ INSERT INTO books (author, title, description, price, url, category_id, seller_i
 VALUES  ('James Patterson', 'The House Next Door', 'Three chilling stories from the world''s bestselling thriller writer', 9.99, '/products-images/book-id-3.jpg', 2, 2);
 
 INSERT INTO books (author, title, description, price, url, category_id, seller_id)
-VALUES  ('Colette McBeth', 'Call Me a Liar', 'A new standalone psychological thriller from Colette McBeth, whose dark, twisty and hugely compelling novels are beloved of writers like Paula Hawkins, Clare Mackintosh and Marian Keyes.', 11, '/products-images/book-id-4.jpg', 1, 1);
+VALUES  ('Colette McBeth', 'Call Me a Liar', 'A new standalone psychological thriller from Colette McBeth, whose dark, twisty and hugely compelling novels are beloved of writers like Paula Hawkins, Clare Mackintosh and Marian Keyes.', 11, '/products-images/book-id-4.jpg', 2, 1);
 
 INSERT INTO books (author, title, description, price, url, category_id, seller_id)
 VALUES  ('Tom Chatfield', 'Critical Thinking', 'Critical Thinking : Your Guide to Effective Argument, Successful Analysis and Independent Study', 18.59, '/products-images/book-id-5.jpg', 3, 4);

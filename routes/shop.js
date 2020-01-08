@@ -13,6 +13,9 @@ router.get('/cart', isAuth, productsController.getCartList);
 // product details => GET
 router.get('/products', productsController.getProductDetails);
 
+// products list by category => GET
+router.get('/category', productsController.getProductsByCategory);
+
 // add-to-cart => POST
 router.post('/add-to-cart', isAuth, productsController.addToCart);
 
