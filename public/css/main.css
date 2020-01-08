@@ -78,6 +78,35 @@ form {
   color: #ffeb3b;
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+
 .mobile-nav {
   width: 30rem;
   height: 100vh;
@@ -231,23 +260,6 @@ form {
 .btn.danger:active {
   background: red;
   color: white;
-}
-
-.logout-btn {
-  display: inline-block;
-  text-decoration: none;
-  font: inherit;
-  border: none;
-  color: white;
-  background: #00695c;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.mobile-logout-btn:hover {
-  background: #00695c;
-  color: white;
-  border-radius: 3px;
 }
 
 @media (min-width: 768px) {

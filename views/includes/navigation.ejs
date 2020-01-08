@@ -6,8 +6,20 @@
             <li class="main-header__item">
                 <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
             </li>
+            <!--
             <li class="main-header__item">
                 <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
+            </li>
+            -->
+            <li class="main-header__item dropdown">
+                <button class="dropbtn">Products
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
             </li>
             <% if (isAuthenticated) { %>
                 <li class="main-header__item">
@@ -50,8 +62,20 @@
         <li class="mobile-nav__item">
             <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
         </li>
+        <!--
         <li class="mobile-nav__item">
             <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
+        </li>
+        -->
+        <li class="mobile-nav__item dropdown">
+            <button class="dropbtn">Products
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
         </li>
         <% if (isAuthenticated) { %>
             <li class="mobile-nav__item">
