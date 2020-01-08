@@ -42,6 +42,7 @@ exports.postLogin = (req, res, next) => {
       }
       else{
         console.log('Bad login!')
+        res.redirect('/');
       }
     }
   })

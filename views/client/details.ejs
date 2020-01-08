@@ -28,13 +28,17 @@
                 <div class="card details__right">
                     <div>
                         <h2 class="details__price">$<%=product.price%></h2>
-                        <hr class="horizontal-line">
-                        <form action="/add-to-cart?bookid=<%=product.id%>" method="POST">
-                            <label for="quantity">Quantity</label>
-                            <input class="quantity" type="number" name="quantity" id="quantity" min=1 max=10 value=1 required>
+                        <% if(isAuthenticated){ %>
                             <hr class="horizontal-line">
-                            <button class="btn" type="submit"> Add to cart </button>
-                        </form>
+                            <form action="/add-to-cart?bookid=<%=product.id%>" method="POST">
+                                <label for="quantity">Quantity</label>
+                                <input class="quantity" type="number" name="quantity" id="quantity" min=1 max=10 value=1 required>
+                                <hr class="horizontal-line">
+                                <button class="btn" type="submit"> Add to cart </button>
+                            </form>
+                        <% } else { %>
+                            <p>Login to order<p>
+                        <% } %>
                     </div>
                 </div>
             <% } %>

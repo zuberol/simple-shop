@@ -4,14 +4,16 @@ const router = express.Router();
 
 const adminController = require('../controllers/admin')
 
+const isAuth = require('./../Middleware/isAuthenticated')
+
 
 // /admin/add-product => GET
-router.get('/add-product', adminController.getProducts);
+router.get('/add-product', isAuth, adminController.getProducts);
 
 // /admin/add-product => POST
-router.post('/add-product', adminController.postProducts);
+router.post('/add-product', isAuth, adminController.postProducts);
 
 // /admin/products => GET
-router.get('/products', adminController.getAdminProducts);
+router.get('/products', isAuth, adminController.getAdminProducts);
 
 module.exports = router;
