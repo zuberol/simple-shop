@@ -25,10 +25,49 @@ exports.getAdminProducts = (request, response, next) => {
     if (error) {
       throw error
     }
-    response.status(200).render('client/products-list.ejs', {
+    response.status(200).render('admin/products-list-admin.ejs', {
       prods: results.rows,
       path: '/admin/products',
       pageTitle: "Admin products",
       isAuthenticated: request.session.isAuthenticated ? true : false})
+  })
+};
+
+// /edit-product => GET
+exports.editProduct = (request, response, next) => {
+  book_id = request.query.bookid;
+  user_email = request.session.email;
+  pool.query('SELECT * FROM books WHERE id=($1) and seller_id=any(SELECT id FROM users WHERE login=($2))', [book_id, user_email], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).render('admin/edit-product.ejs', {
+      prods: results.rows,
+      path: '/admin/edit-product',
+      pageTitle: "Edit product",
+      isAuthenticated: request.session.isAuthenticated ? true : false})
+  })
+};
+
+// /edit-product => POST
+exports.postEditedProduct = (request, response) => {
+  const { id, author, title, price, description, url, category } = request.body;
+  pool.query('UPDATE books set author=($1), title=($2), price=($3), description=($4), url=($5), category_id=($6) WHERE id=($7)', [author, title, price, description, url, category, id], error => {
+    if (error) {
+      throw error
+    }
+    response.redirect('/admin/products');
+  })
+};
+
+// /delete-product => POST
+exports.deleteProduct = (request, response) => {
+  const book_id = request.query.bookid;
+  const seller_id = request.session.email;
+  pool.query('DELETE FROM books WHERE id=($1) and seller_id=any(SELECT id FROM users WHERE login=($2))', [book_id, seller_id], error => {
+    if (error) {
+      throw error
+    }
+    response.redirect('/admin/products');
   })
 };
