@@ -13,11 +13,7 @@
 
 ### fix quantity error
 
-### dodawanie zdjecia w /add-product (wysylanie pliku na serwer zamiast url)
-
 ### trigger do bazy danych - gdy pole niewymagane jest puste - set default
-
-### poprawić wygląd stron add-product i edit-product
 
 ### dokumentacja projektu do oddania
 
@@ -25,3 +21,4 @@
 ## Optional
 ### Orders ==> dodac tabele Orders    +    button w   /cart   do /orders , redirect    +   unique (prod name, seller) +free shipping (﻿ ͡° ͜ʖ ͡°)
 
+### dodawanie zdjecia w /add-product (zamiast url wysylanie pliku na serwer)

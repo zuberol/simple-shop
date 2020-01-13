@@ -7,45 +7,47 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main>
-        <% if (prods.length > 0) { %>
-            <div class="grid">
-                <% for (let product of prods) { %>
-
-                    <div class="form-div">
-                        <form class="product-form" action="/admin/edit-product?bookid=<%=product.id%>" method="POST">
-                            <div class="form-control">
-                                <input type="hidden" name="id" id="id" value="<%= product.id %>" />
-                                <label for="title">Title</label>
-                                <input type="text" name="title" id="title" value="<%= product.title %>" required>
-                                <label for="title">Author</label>
-                                <input type="text" name="author" id="author" value="<%= product.author %>" required>
-                                <label for="price">Price</label>
-                                <input type="number" step="0.01" name="price" id="price" value="<%=product.price%>" required>
-                                <label for="url">Image URL</label>
-                                <input type="text" name="url" id="url" value="<%= product.url %>">
-                                <label for="description">Description</label>
-                                <textarea name="description" id="description" rows="10"><%=product.description%></textarea>
-                                <label for="Category">Category</label>
-                                <select name="category" id="category" size=12 required>
-                                    <option value=1>Children Book</option>
-                                    <option value=2>Crime & Thriller</option>
-                                    <option value=3>Education</option>
-                                    <option value=4>Food & Drink</option>
-                                    <option value=5>Health</option>
-                                    <option value=6>History</option>
-                                    <option value=7>Horror</option>
-                                    <option value=8>Others</option>
-                                    <option value=9>Poetry</option>
-                                    <option value=10>Romance</option>
-                                    <option value=11>Science Fiction & Fantasy</option>
-                                    <option value=12>Sport</option>
-                                </select>
-                            </div>
+        <div class="center-div">
+            <h1>Edit your book</h1>
+        </div>
+        <% if (prods.length > 0) { %>     
+            <% for (let product of prods) { %>
+                <div class="form-div">
+                    <form class="product-form" action="/admin/edit-product?bookid=<%=product.id%>" method="POST">
+                        <div class="form-control">
+                            <input type="hidden" name="id" id="id" value="<%= product.id %>" />
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" value="<%= product.title %>" required>
+                            <label for="title">Author</label>
+                            <input type="text" name="author" id="author" value="<%= product.author %>" required>
+                            <label for="price">Price</label>
+                            <input type="number" min=0 step="0.01" name="price" id="price" value="<%=product.price%>" required>
+                            <label for="url">Image URL</label>
+                            <input type="text" name="url" id="url" value="<%= product.url %>">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" rows="10"><%=product.description%></textarea>
+                            <label for="Category">Category</label>
+                            <select name="category" id="category" size=12 required>
+                                <option value=1>Children Book</option>
+                                <option value=2>Crime & Thriller</option>
+                                <option value=3>Education</option>
+                                <option value=4>Food & Drink</option>
+                                <option value=5>Health</option>
+                                <option value=6>History</option>
+                                <option value=7>Horror</option>
+                                <option value=8>Others</option>
+                                <option value=9>Poetry</option>
+                                <option value=10>Romance</option>
+                                <option value=11>Science Fiction & Fantasy</option>
+                                <option value=12>Sport</option>
+                            </select>
+                        </div>
+                        <div class="center-div">
                             <button class="btn" type="submit">Save changes</button>
-                        </form>
-                    </div>
-                <% } %>
-            </div>
+                        </div>
+                    </form>
+                </div>
+            <% } %>         
         <% } else { %>
             <h1>No Products Found!</h1>
         <% } %>

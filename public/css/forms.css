@@ -1,23 +1,51 @@
+.form-div h1 {
+  
+}
+
 .form-control {
   margin: 1rem 0;
 }
 
+.form-control label {
+  margin-top: 1rem;
+}
+
 .form-control label,
 .form-control input,
-.form-control textarea {
+.form-control textarea,
+.form-control select {
   display: block;
   width: 100%;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .form-control input,
-.form-control textarea {
+.form-control textarea,
+.form-control select {
   border: 1px solid #a1a1a1;
   font: inherit;
   border-radius: 2px;
+  padding: 0.25rem
 }
 
 .form-control input:focus,
-.form-control textarea:focus {
+.form-control textarea:focus,
+.form-control select:focus {
   outline-color: #00695c;
+}
+
+.form-control select option:checked,
+.form-control select option:hover {
+  background: #00695c;
+  color: white;
+}
+
+.form-control select {
+  overflow-y: hidden;
+}
+
+.center-div {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
