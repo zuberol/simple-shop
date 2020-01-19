@@ -9,7 +9,7 @@
 
 ### Checkbox w /products (zrobione ale wpisane ręcznie)
 
-### pop-up's
+### pop-up's DONE
 
 ### fix quantity error
 
