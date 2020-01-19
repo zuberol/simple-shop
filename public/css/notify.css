@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.notify-info, .notify-success, .notify-warning, .notify-error {
+    padding:10px;
+    margin:10px 0;
+    font: inherit;
+    border-radius: 2px;
+    opacity: 1;
+    transition: opacity 0.6s; /* 600ms to fade out */
+}
+
+.notify-info {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+.notify-success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+.notify-warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+}
+.notify-error {
+    color: #D8000C;
+    background-color: #FFD2D2;
+}
+
+.notify-error-text, .notify-info-text {
+    position: relative;
+}
+
+.notify-error-text:before {
+    content: "\f057";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    /*--adjust as necessary--*/
+    font-size: 1.2em;
+    padding-right: 0.5em;
+
+}
+
+.notify-info-text:before {
+    content: "\f05a";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    /*--adjust as necessary--*/
+    font-size: 1.2em;
+    padding-right: 0.5em;
+
+}
+
+
+

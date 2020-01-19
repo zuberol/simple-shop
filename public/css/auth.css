@@ -1,7 +1,5 @@
-.login-form {
-    width: 20rem;
-    max-width: 90%;
+main, body {
+    background: #f2f2f2;
     margin: auto;
-    display: block;
-  }
-  
+    height: 100%;
+}

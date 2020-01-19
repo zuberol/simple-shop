@@ -15,7 +15,12 @@ exports.postProducts = (request, response) => {
 
 // /add-product => GET
 exports.getProducts = (req, res, next) => {
-  res.render('admin/add-product', {path: '/admin/add-product',pageTitle:"Admin products list", isAuthenticated: true});
+  res.render('admin/add-product', {
+    path: '/admin/add-product',
+    pageTitle:"Admin products list",
+    isAuthenticated: req.session.isAuthenticated ? true : false,
+    isAuthorized: req.session.isAuthorized ? true : false
+    });
 };
 
 // /products => GET
@@ -29,7 +34,9 @@ exports.getAdminProducts = (request, response, next) => {
       prods: results.rows,
       path: '/admin/products',
       pageTitle: "Admin products",
-      isAuthenticated: request.session.isAuthenticated ? true : false})
+      isAuthenticated: request.session.isAuthenticated ? true : false,
+      isAuthorized: request.session.isAuthorized ? true : false
+    })
   })
 };
 
@@ -45,7 +52,9 @@ exports.editProduct = (request, response, next) => {
       prods: results.rows,
       path: '/admin/edit-product',
       pageTitle: "Edit product",
-      isAuthenticated: request.session.isAuthenticated ? true : false})
+      isAuthenticated: request.session.isAuthenticated ? true : false,
+      isAuthorized: request.session.isAuthorized ? true : false
+    })
   })
 };
 

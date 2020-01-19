@@ -1,22 +1,36 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="/css/notify.css">
 </head>
 
 <body>
    <%- include('../includes/navigation.ejs') %>
 
     <main>
-        <form class="login-form" action="/login" method="POST">
-            <div class="form-control">
-                <label for="email">E-Mail</label>
-                <input type="email" name="email" id="email">
-            </div>
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password">
-            </div>
-            <button class="btn" type="submit">Login</button>
-        </form>
+        <div class="form-container">
+            <div class="wrap-form">
+                <% if (locals.alertMessage) { %>
+                    <div class="notify-error">
+                        <span class="notify-error-text"><%=locals.alertMessage%></span>
+                    </div>
+                <% } %>
+        
+                <form class="login-signup-form" action="/login" method="POST">
+                    <div class="form-control">
+                        <label for="email">E-Mail</label>
+                        <input type="email" name="email" id="email">
+                    </div>
+                    <div class="form-control">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <button class="btn" type="submit">Login</button>
+                </form>
+            </div>            
+        </div>
     </main>
+<% if (locals.alertMessage) { %>
+<script src="/js/notify.js"></script>
+<% } %>
 <%- include('../includes/end.ejs') %>

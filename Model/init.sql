@@ -14,7 +14,9 @@ CREATE TABLE categories (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   login VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL
+  password VARCHAR(255) NOT NULL,
+  permissions VARCHAR(255) DEFAULT 'basic' NOT NULL,
+  CHECK (permissions ~ '^basic$' or permissions ~ '^extended$')
 );
 
 CREATE TABLE books (
@@ -41,7 +43,7 @@ CREATE TABLE cart (
 );
 
 CREATE TABLE "session" (
-    "sid" varchar NOT NULL COLLATE "default",
+  "sid" varchar NOT NULL COLLATE "default",
 	"sess" json NOT NULL,
 	"expire" timestamp(6) NOT NULL
 )
@@ -72,6 +74,9 @@ INSERT INTO users (login, password) VALUES ('harry2@gmail.com', 'hello.world'); 
 INSERT INTO users (login, password) VALUES ('nobody@o2.pl', 'xyz00'); /* 3 */
 INSERT INTO users (login, password) VALUES ('jane-p@interia.pl', 'qwerty'); /* 4 */
 INSERT INTO users (login, password) VALUES ('mrrobot@gmail.com', 'ls-al'); /* 5 */
+/* Dummy admin */
+INSERT INTO users (login, password, permissions) VALUES ('admin@admin', 'admin', 'extended'); /* Delete on release */
+
 
 
 /* Books */

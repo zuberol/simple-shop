@@ -10,12 +10,13 @@ exports.getProductsList = (request, response, next) => {
       prods: results.rows,
       path: '/',
       pageTitle:"Products list",
-      isAuthenticated: request.session.isAuthenticated ? true : false
+      isAuthenticated: request.session.isAuthenticated ? true : false,
+      isAuthorized: request.session.isAuthorized ? true : false
     })
   })
 };
 
-// default => GET
+// /category?catid=INTEGER => GET
 exports.getProductsByCategory = (request, response, next) => {
   const category_id = request.query.catid;
   pool.query('SELECT * FROM books WHERE category_id=($1)', [category_id], (error, results) => {
@@ -26,7 +27,8 @@ exports.getProductsByCategory = (request, response, next) => {
       prods: results.rows,
       path: '/category',
       pageTitle:"Products list",
-      isAuthenticated: request.session.isAuthenticated ? true : false
+      isAuthenticated: request.session.isAuthenticated ? true : false,
+      isAuthorized: request.session.isAuthorized ? true : false
     })
   })
 };
@@ -43,7 +45,9 @@ exports.getProductDetails = (request, response, next) => {
         prods: results.rows,
         path: '/products',
         pageTitle: "Product details",
-        isAuthenticated: request.session.isAuthenticated ? true : false})
+        isAuthenticated: request.session.isAuthenticated ? true : false,
+        isAuthorized: request.session.isAuthorized ? true : false
+      })
     })
   } else {
     pool.query('SELECT * FROM books', (error, results) => {
@@ -54,7 +58,9 @@ exports.getProductDetails = (request, response, next) => {
         prods: results.rows,
         path: '/products',
         pageTitle:"Products list",
-        isAuthenticated: request.session.isAuthenticated ? true : false})
+        isAuthenticated: request.session.isAuthenticated ? true : false,
+        isAuthorized: request.session.isAuthorized ? true : false
+      })
     })
   }
 };
@@ -70,7 +76,8 @@ exports.getCartList = (request, response, next) => {
       prods: results.rows,
       path: '/cart',
       pageTitle: "Cart",
-      isAuthenticated: request.session.isAuthenticated ? true : false
+      isAuthenticated: request.session.isAuthenticated ? true : false,
+      isAuthorized: request.session.isAuthorized ? true : false
     })
   })
 };
