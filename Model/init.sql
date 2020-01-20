@@ -21,15 +21,16 @@ CREATE TABLE users (
 
 CREATE TABLE books (
   id SERIAL PRIMARY KEY,
-  author VARCHAR(255),
+  author VARCHAR(255) NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT DEFAULT 'No description',
   price float(8) NOT NULL,
   url VARCHAR(255) DEFAULT '/products-images/no-image.png',
-  category_id INT,
+  category_id INT DEFAULT 8,  /* Others */
   seller_id INT,
-  FOREIGN KEY (category_id) REFERENCES categories(id) ON UPDATE CASCADE ON DELETE SET NULL,
-  FOREIGN KEY (seller_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON UPDATE CASCADE ON DELETE SET DEFAULT,
+  FOREIGN KEY (seller_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  UNIQUE (title, author)
 );
 
 CREATE TABLE cart (
@@ -54,18 +55,18 @@ ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFE
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
 
 /* Categories */
-INSERT INTO categories (name) VALUES ('Children Book'); /* 1 */
-INSERT INTO categories (name) VALUES ('Crime & Thriller');  /* 2 */
-INSERT INTO categories (name) VALUES ('Education'); /* 3 */
-INSERT INTO categories (name) VALUES ('Food & Drink');  /* 4 */
-INSERT INTO categories (name) VALUES ('Health');    /* 5 */
-INSERT INTO categories (name) VALUES ('History');   /* 6 */
-INSERT INTO categories (name) VALUES ('Horror');    /* 7 */
-INSERT INTO categories (name) VALUES ('Others');    /* 8 */
-INSERT INTO categories (name) VALUES ('Poetry');    /* 9 */
-INSERT INTO categories (name) VALUES ('Romance');   /* 10 */
-INSERT INTO categories (name) VALUES ('Science Fiction & Fantasy'); /* 11 */
-INSERT INTO categories (name) VALUES ('Sport'); /* 12 */
+INSERT INTO categories (id, name) VALUES (1, 'Children Book'); /* 1 */
+INSERT INTO categories (id, name) VALUES (2, 'Crime & Thriller');  /* 2 */
+INSERT INTO categories (id, name) VALUES (3, 'Education'); /* 3 */
+INSERT INTO categories (id, name) VALUES (4, 'Food & Drink');  /* 4 */
+INSERT INTO categories (id, name) VALUES (5, 'Health');    /* 5 */
+INSERT INTO categories (id, name) VALUES (6, 'History');   /* 6 */
+INSERT INTO categories (id, name) VALUES (7, 'Horror');    /* 7 */
+INSERT INTO categories (id, name) VALUES (8, 'Others');    /* 8 */
+INSERT INTO categories (id, name) VALUES (9, 'Poetry');    /* 9 */
+INSERT INTO categories (id, name) VALUES (10, 'Romance');   /* 10 */
+INSERT INTO categories (id, name) VALUES (11, 'Science Fiction & Fantasy'); /* 11 */
+INSERT INTO categories (id, name) VALUES (12, 'Sport'); /* 12 */
 
 
 /* Users */

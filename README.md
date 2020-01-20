@@ -13,7 +13,7 @@
 
 ### fix quantity error
 
-### trigger do bazy danych - gdy pole niewymagane jest puste - set default
+### gdy pole niewymagane jest puste - set default DONE (bez użycia triggerów)
 
 ### dokumentacja projektu do oddania
 

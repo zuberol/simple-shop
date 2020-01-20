@@ -4,10 +4,12 @@ const { pool } = require('../Model/database-pool');
 exports.postProducts = (request, response) => {
   const { author, title, price, description, url, category } = request.body;
   const seller_id = request.session.email;
-  pool.query('INSERT INTO books (author, title, price, description, url, category_id, seller_id) VALUES ($1, $2, $3, $4, $5, $6, (SELECT id FROM users WHERE login=($7)))', [author, title, price, description, url, category, seller_id], error => {
-    if (error) {
-      throw error
-    }
+  let descr = (description) ? description : 'No description.'; 
+  let img = (url) ? url : '/products-images/no-image.png';
+  pool.query('INSERT INTO books (author, title, price, description, url, category_id, seller_id) VALUES ($1, $2, $3, $4, $5, $6, (SELECT id FROM users WHERE login=($7)))', [author, title, price, descr, img, category, seller_id], error => {
+    //if (error) {
+    //  throw error
+    //}
     response.redirect('/');
     //console.log("Product added!")
   })
@@ -61,7 +63,9 @@ exports.editProduct = (request, response, next) => {
 // /edit-product => POST
 exports.postEditedProduct = (request, response) => {
   const { id, author, title, price, description, url, category } = request.body;
-  pool.query('UPDATE books set author=($1), title=($2), price=($3), description=($4), url=($5), category_id=($6) WHERE id=($7)', [author, title, price, description, url, category, id], error => {
+  let descr = (description) ? description : 'No description.'; 
+  let img = (url) ? url : '/products-images/no-image.png';
+  pool.query('UPDATE books set author=($1), title=($2), price=($3), description=($4), url=($5), category_id=($6) WHERE id=($7)', [author, title, price, descr, img, category, id], error => {
     if (error) {
       throw error
     }
