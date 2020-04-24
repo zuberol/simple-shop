@@ -36,7 +36,8 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(errorRoute);
 
+const listeningPort = 3000;
 
-app.listen(3000, () => {
-    console.log('Server listening ...')
+app.listen(listeningPort, () => {
+    console.log(`Server listening on port ${listeningPort}`)
 });

@@ -45,7 +45,7 @@ exports.postLogin = (req, res, next) => {
         req.session.isAuthorized = user_params.rows[0].permissions === 'extended' ? true : false;
 
         req.session.save(err => {
-          console.log(err);
+          console.log(1);
           res.redirect('/');
         });
       }
@@ -63,6 +63,7 @@ exports.postLogin = (req, res, next) => {
   })
   .catch(error => {
     console.log(error)
+    console.log(2);
     res.redirect('/')
   });
 };
@@ -95,6 +96,7 @@ exports.postSignup = (req, res, next) => {
       })
       .catch(error => {
         console.log(error)
+        console.log(3);
         res.redirect('/')
       });
     }
@@ -110,6 +112,7 @@ exports.postSignup = (req, res, next) => {
   })
   .catch(error => {
     console.log(error)
+    console.log(4);
     res.redirect('/')
   });
 };
@@ -118,6 +121,7 @@ exports.postLogout = (req, res, next) => {
   req.session.destroy(err => {
     //console.log(req.session);
     console.log(err);
+    console.log(5);
     res.redirect('/');
   });
 };

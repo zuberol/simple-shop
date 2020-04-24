@@ -9,7 +9,7 @@ const isAuthorized = require('./../Middleware/isAuthorized');
 
 
 // /admin/add-product => GET
-router.get('/add-product', isAuthenticated,isAuthorized, adminController.getProducts);
+router.get('/add-product', isAuthenticated, isAuthorized, adminController.getProducts);
 
 // /admin/add-product => POST
 router.post('/add-product', isAuthenticated, isAuthorized, adminController.postProducts);
